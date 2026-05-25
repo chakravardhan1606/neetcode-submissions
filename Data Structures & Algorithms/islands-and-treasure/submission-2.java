@@ -1,0 +1,36 @@
+class Solution {
+    public void islandsAndTreasure(int[][] grid) {
+        Queue<int []> q = new LinkedList<>();
+         int m = grid.length;
+         int n= grid[0].length;
+        for(int i =0; i<grid.length;i++){
+            for(int j =0; j<grid[i].length;j++){
+                if(grid[i][j]==0){
+                    q.add(new int []{i,j});
+                }
+            }
+        }
+
+        if(q.isEmpty()) return;
+        int [][] dirs = {{-1,0},{0,-1},{1,0},{0,1}};
+        while(!q.isEmpty()){
+         int [] node = q.poll();
+        int row = node[0];
+        int  col= node[1];
+
+         for(int [] rc : dirs){
+            int r = row+rc[0];
+            int c = col+rc[1];
+
+            if(r>=m||c>=n||r<0||c<0||grid[r][c] != Integer.MAX_VALUE)
+            continue;
+
+            q.add(new int[] { r, c });
+
+                grid[r][c] = grid[row][col] + 1;
+         }
+         
+        }
+    }
+}
+  
